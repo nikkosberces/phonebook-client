@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import personService from "../services/personService";
+import { FaTrashAlt } from "react-icons/fa";
 
 function PersonList({ persons, setPersons }) {
   useEffect(() => {
@@ -11,10 +12,25 @@ function PersonList({ persons, setPersons }) {
       .catch((error) => console.log(error));
   }, []);
 
+  const deletePerson = (id) => {
+    personService
+      .deletePerson(id)
+      .then((_response) => {
+        setPersons(persons.filter((person) => person.id !== id));
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <ul>
+    <ul className="bg-slate-700 text-white p-4">
       {persons.map((person) => (
-        <li key={person.id}>{person.name}</li>
+        <li key={person.id} className="flex items-center justify-between">
+          • {person.name} ({person.number})
+          <FaTrashAlt
+            className="hover: cursor-pointer"
+            onClick={() => deletePerson(person.id)}
+          />
+        </li>
       ))}
     </ul>
   );

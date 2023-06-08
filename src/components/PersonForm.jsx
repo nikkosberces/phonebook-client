@@ -6,7 +6,7 @@ function PersonForm({ persons, setPersons }) {
   const [newNumber, setNewNumber] = useState("");
 
   const addPerson = (e) => {
-    e.preventDefault(); // Fixed typo in preventDefault()
+    e.preventDefault();
 
     const personObject = {
       name: newPerson,
@@ -24,22 +24,28 @@ function PersonForm({ persons, setPersons }) {
   };
 
   return (
-    <form onSubmit={addPerson}>
-      <label>Name:</label>
-      <input
-        type="text"
-        value={newPerson}
-        onChange={(e) => setNewPerson(e.target.value)}
-      />{" "}
-      <br />
-      <label>Phone Number:</label>
-      <input
-        type="text"
-        value={newNumber}
-        onChange={(e) => setNewNumber(e.target.value)}
-      />{" "}
-      <br />
-      <button type="submit">Add</button> {/* Fixed typo in submit */}
+    <form onSubmit={addPerson} className="flex flex-col gap-4 bg-green-500 p-4">
+      <div className="flex flex-col">
+        <label>Name</label>
+        <input
+          className="h-8"
+          type="text"
+          value={newPerson}
+          onChange={(e) => setNewPerson(e.target.value)}
+        />
+      </div>
+      <div className="flex flex-col">
+        <label>Phone Number</label>
+        <input
+          className="h-8"
+          type="text"
+          value={newNumber}
+          onChange={(e) => setNewNumber(e.target.value)}
+        />
+      </div>
+      <button className="bg-blue-500 py-2 text-white font-bold" type="submit">
+        Add
+      </button>
     </form>
   );
 }
